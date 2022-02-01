@@ -6,13 +6,12 @@ product: '{% data reusables.gated-features.secret-scanning %}'
 redirect_from:
   - /code-security/secret-security/defining-custom-patterns-for-secret-scanning
 versions:
+  fpt: '*'
   ghes: '>=3.2'
   ghae: '*'
   ghec: '*'
-type: how_to
 topics:
-  - Advanced Security
-  - Secret scanning
+  - Repositories
 ---
 
 {% ifversion ghes < 3.3 or ghae %}
@@ -25,7 +24,7 @@ topics:
 
 ## About custom patterns for {% data variables.product.prodname_secret_scanning %}
 
-{% data variables.product.company_short %} performs {% data variables.product.prodname_secret_scanning %} on {% ifversion fpt or ghec %}public and private{% endif %} repositories for secret patterns provided by {% data variables.product.company_short %} and {% data variables.product.company_short %} partners. {% data reusables.secret-scanning.partner-program-link %} For details of the supported secrets and service providers, see "[{% data variables.product.prodname_secret_scanning_caps %} partners](/code-security/secret-scanning/secret-scanning-partners)."
+{% data variables.product.company_short %} performs {% data variables.product.prodname_secret_scanning %} on {% ifversion fpt or ghec %}public and private{% endif %} repositories for secret patterns provided by {% data variables.product.company_short %} and {% data variables.product.company_short %} partners. For more information on the {% data variables.product.prodname_secret_scanning %} partner program, see "<a href="/developers/overview/secret-scanning-partner-program" class="dotcom-only">Secret scanning partner program</a>."
 
 However, there can be situations where you want to scan for other secret patterns in your {% ifversion fpt or ghec %}private{% endif %} repositories. For example, you might have a secret pattern that is internal to your organization. For these situations, you can define custom {% data variables.product.prodname_secret_scanning %} patterns in your enterprise, organization, or {% ifversion fpt or ghec %}private{% endif %} repository on {% data variables.product.product_name %}. You can define up to 
 {%- ifversion fpt or ghec or ghes > 3.3 %} 500 custom patterns for each organization or enterprise account, and up to 100 custom patterns per {% ifversion fpt or ghec %}private{% endif %} repository.

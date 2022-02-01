@@ -245,7 +245,7 @@ Você pode consultar a API para encontrar informações sobre itens no seu proje
 
 {% note %}
 
-**Observação**: A API não retornará informações sobre os rascunhos dos problemas.
+**Note**: The API will not return information about draft issues.
 
 {% endnote %}
 

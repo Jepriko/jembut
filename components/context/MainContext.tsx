@@ -25,7 +25,6 @@ type VersionItem = {
   versionTitle: string
   currentRelease: string
   latestVersion: string
-  shortName: string
 }
 
 export type ProductTreeNode = {

@@ -17,69 +17,46 @@ topics:
 shortTitle: Límites de tasa
 ---
 
-{% data reusables.enterprise.rate_limit %}
-
-{% data reusables.rest-api.always-check-your-limit %}
-
-{% ifversion ghec or fpt %}
-
-## About rate limits for apps
-
-Rate limits for {% data variables.product.prodname_github_apps %} and {% data variables.product.prodname_oauth_apps %} depend on the plan for the organization where you install the application. For more information, see "[{% data variables.product.company_short %}'s products](/get-started/learning-about-github/githubs-products)" and "[Types of {% data variables.product.company_short %} accounts](/get-started/learning-about-github/types-of-github-accounts#organization-accounts)."
-
-{% endif %}
-
 ## Solicitudes de servidor a servidor
 
-{% ifversion ghec or fpt %}
+{% ifversion ghec %}
 
-### Default server-to-server rate limits for {% data variables.product.prodname_dotcom_the_website %}
+Los límites de tasa para las solicitudes de servidor a servidor que hace {% data variables.product.prodname_github_apps %} dependen de si la app está instalada o no. Si la app está instalada en los repositorios u organizaciones que pertenecen a una empresa en {% data variables.product.product_location %}, entonces la tasa es más alta que para aquellas instalaciones que están fuera de una empresa.
 
-{% endif %}
-
-Las {% data variables.product.prodname_github_apps %} que hagan solicitudes de servidor a servidor utilizan el límite de tasa mínimo de la instalación, el cual es de 5,000 solicitudes por hora. If an application is installed on an organization with more than 20 users, the application receives another 50 requests per hour for each user. Las instalaciones que tienen más de 20 repositorios reciben otras 50 solicitudes adicionales por hora para cada repositorio. El límite de tasa máximo para una instalación es de 12,500 solicitudes por hora.
-
-{% ifversion fpt or ghec %}
-
-### Server-to-server rate limits for {% data variables.product.prodname_ghe_cloud %}
+### Límites de tasa normales de servidor a servidor
 
 {% endif %}
 
-{% ifversion fpt or ghec %}
+{% data reusables.apps.api-rate-limits-non-ghec %}
 
-{% data variables.product.prodname_github_apps %} that are installed on an organization or a repository within an enterprise on {% data variables.product.product_location %} are subject to a limit of 15,000 requests per hour.
+{% ifversion ghec %}
+
+### Límites de tasa de servidor a servidor de {% data variables.product.prodname_ghe_cloud %}
+
+Las {% data variables.product.prodname_github_apps %} que se instalan en una organización o repositorio que pertenece a una empresa en {% data variables.product.product_location %} tienen un límite de tasa de 15,000 solicitudes por hora para las solicitudes de servidor a servidor.
 
 {% endif %}
 
 ## Solicitudes de usuario a servidor
 
-{% data variables.product.prodname_github_apps %} and {% data variables.product.prodname_oauth_apps %} can also act on behalf of a user, making user-to-server requests after the user authorizes the app. For more information, see "[Authorizing {% data variables.product.prodname_github_apps %}](/authentication/keeping-your-account-and-data-secure/authorizing-github-apps)" and "[Authorizing {% data variables.product.prodname_oauth_apps %}](/authentication/keeping-your-account-and-data-secure/authorizing-oauth-apps)."
-
-User-to-server requests from {% data variables.product.prodname_oauth_apps %} are authenticated with an OAuth token. User-to-server requests from {% data variables.product.prodname_github_apps %} are authenticated with either an OAuth token or an expiring user access token. For more information, see "[Identifying and authorizing users for {% data variables.product.prodname_github_apps %}](/developers/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps#identifying-and-authorizing-users-for-github-apps)" and "[Authorizing {% data variables.product.prodname_oauth_apps %}](/developers/apps/building-oauth-apps/authorizing-oauth-apps)."
-
-{% ifversion fpt or ghec %}
-
-### Default user-to-server rate limits for {% data variables.product.prodname_dotcom_the_website %}
-
-{% endif %}
+Las {% data variables.product.prodname_github_apps %} también pueden actuar [en nombre de un usuario](/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-and-authorizing-users-for-github-apps) al hacer solicitudes de usuario a servidor.
 
 {% ifversion ghec %}
 
 Los límites de tasa para las solicitudes de usuario a servidor que hace {% data variables.product.prodname_github_apps %} dependen de donde se instala la app. Si la app está instalada en los repositorios u organizaciones que pertenecen a una empresa en {% data variables.product.product_location %}, entonces la tasa es más alta que para aquellas instalaciones que están fuera de una empresa.
 
-{% endif %}
-
-{% data reusables.apps.user-to-server-rate-limits %}
-
-{% ifversion fpt or ghec %}
-
-### User-to-server rate limits for {% data variables.product.prodname_ghe_cloud %}
-
-{% data reusables.apps.user-to-server-rate-limits-ghec %}
+### Límites de tasa normales de usuario a servidor
 
 {% endif %}
 
-## Leer más
+El límite de tasa de las solicitudes de usuario a servidor es de {% ifversion ghae %}15,000{% else %}5,000{% endif %} solicitudes por hora y por usuario autenticado. Todas las aplicaciones de OAuth que autorizó éste usuario, los tokens de acceso personal que le pertenecen, y las solicitudes que se autenticaron con su{% ifversion ghae %} token{% else %} nombre de usuario y contraseña{% endif %} comparten la misma cuota de 5,000 solicitudes por hora para dicho usuario.
 
-- "[Rate limiting](/rest/overview/resources-in-the-rest-api#rate-limiting)" in the REST API documentation
-- "[Resource limitations]({% ifversion ghec %}/free-pro-team@latest{% endif %}/graphql/overview/resource-limitations)" in the GraphQL API documentation
+{% ifversion ghec %}
+
+### Límites de tasa de usuario a servidor de {% data variables.product.prodname_ghe_cloud %}
+
+Cuando un usuario pertenece a una empresa en {% data variables.product.product_location %}, las solicitudes de usuario a servidor que pertenecen a la misma empresa tienen un límite de tasa de 15,000 solicitudes por hora y por usuario autenticado. Todas las aplicaciones de OAuth que autorice este usuario, tokens de acceso personal que le pertenezcan y solicitudes autenticadas con su nombre de usuario y contraseña compartirán la misma cuota de 5,000 solicitudes por hora para dicho usuario.
+
+{% endif %}
+
+Para obtener información más detallada acerca de los límites de tasa, consulta la sección "[Limitaciones a las tasas](/rest/overview/resources-in-the-rest-api#rate-limiting)" para la API de REST y "[Limitaciones a los recursos]({% ifversion ghec %}/free-pro-team@latest{% endif %}/graphql/overview/resource-limitations)" para la API de GraphQL.

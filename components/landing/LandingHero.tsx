@@ -11,8 +11,7 @@ import { Lead } from 'components/ui/Lead'
 
 export const LandingHero = () => {
   const { airGap } = useMainContext()
-  const { product_video, shortTitle, title, beta_product, intro, introLinks } =
-    useProductLandingContext()
+  const { product_video, shortTitle, beta_product, intro, introLinks } = useProductLandingContext()
   const { t } = useTranslation('product_landing')
   const [renderIFrame, setRenderIFrame] = useState(false)
 
@@ -25,7 +24,7 @@ export const LandingHero = () => {
     <header className="d-lg-flex gutter-lg mb-6">
       <div className={cx('col-12 mb-3 mb-lg-0', product_video && 'col-lg-6')}>
         <h1>
-          {shortTitle || title}{' '}
+          {shortTitle}{' '}
           {beta_product && <span className="Label Label--success v-align-middle">Beta</span>}
         </h1>
 

@@ -1,11 +1,10 @@
 import cx from 'classnames'
 import dayjs from 'dayjs'
 import { ActionList } from '@primer/components'
-import { useTranslation } from 'components/hooks/useTranslation'
+
 import { Link } from 'components/Link'
 import { ArrowRightIcon } from '@primer/octicons-react'
 import { FeaturedLink } from 'components/context/ProductLandingContext'
-import { useMainContext } from 'components/context/MainContext'
 import { TruncateLines } from 'components/ui/TruncateLines'
 import { BumpLink } from 'components/ui/BumpLink'
 
@@ -22,8 +21,6 @@ export const ArticleList = ({
   viewAllTitleText,
   articles,
 }: ArticleListPropsT) => {
-  const { t } = useTranslation('product_landing')
-  const { page } = useMainContext()
   return (
     <>
       {title && (
@@ -33,9 +30,9 @@ export const ArticleList = ({
             <Link
               href={viewAllHref}
               className="ml-4"
-              {...(viewAllTitleText ? { 'aria-label': `${page.title} - ${viewAllTitleText}` } : {})}
+              {...(viewAllTitleText ? { title: viewAllTitleText } : {})}
             >
-              {t('view')} <ArrowRightIcon size={14} className="v-align-middle" />
+              View all <ArrowRightIcon size={14} className="v-align-middle" />
             </Link>
           )}
         </div>
