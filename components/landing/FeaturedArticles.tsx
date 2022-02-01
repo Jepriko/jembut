@@ -32,7 +32,7 @@ export const FeaturedArticles = () => {
           <ArticleList
             title={t('whats_new')}
             viewAllHref={changelogUrl}
-            viewAllTitleText={t('all_changelogs')}
+            viewAllTitleText="All ChangeLog posts"
             articles={(whatsNewChangelog || []).map((link) => {
               return {
                 title: link.title,

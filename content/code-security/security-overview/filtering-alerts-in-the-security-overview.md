@@ -5,7 +5,6 @@ permissions: Organization owners and security managers can access the security o
 product: '{% data reusables.gated-features.security-center %}'
 versions:
   fpt: '*'
-  ghae: issue-4554
   ghes: '>3.1'
   ghec: '*'
 type: how_to
@@ -101,11 +100,11 @@ Available in the organization-level overview.
 | -------- | -------- |
 | <code>topic:<em>TOPIC-NAME</em></code> | Displays repositories that are classified with *TOPIC-NAME*. |
 
-{% if security-overview-views %}
+{% ifversion ghec or ghes > 3.4 %}
 
 ## Filter by severity
 
-Available in the code scanning alert views. All code scanning alerts have one of the categories shown below. You can click any result to see full details of the relevant rule, and the line of code that triggered the alert.
+Available in the code scanning alert views. All code scanning alerts have one of the categories shown below. You can click any result to see full details of the relevant rule, and the line of code that triggered the alert. 
 
 | Qualifier | Description |
 | -------- | -------- |
@@ -125,8 +124,8 @@ Available in the secret scanning alert views.
 
 | Qualifier | Description |
 | -------- | -------- |
-| `secret-type:SERVICE_PROVIDER` | Displays alerts for the specified secret and provider. For more information, see "[{% data variables.product.prodname_secret_scanning_caps %} partners](/code-security/secret-scanning/secret-scanning-partners)." |
-| `secret-type:CUSTOM-PATTERN` | Displays alerts for secrets matching the specified custom pattern. {% ifversion not fpt %}For more information, see "[Defining custom patterns for secret scanning](/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning)."{% endif %} |
+| `secret-type:SERVICE_PROVIDER` | Displays alerts for the specified secret and provider. For more information, see "[List of supported secrets for private repositories](/code-security/secret-scanning/about-secret-scanning#list-of-supported-secrets-for-private-repositories) |
+| `secret-type:CUSTOM-PATTERN` | Displays alerts for secrets matching the specified custom pattern. For more information, see "[Defining custom patterns for secret scanning](/code-security/secret-scanning/defining-custom-patterns-for-secret-scanning)." |
 
 ## Filter by provider
 
@@ -134,4 +133,4 @@ Available in the secret scanning alert views.
 
 | Qualifier | Description |
 | -------- | -------- |
-|`provider:PROVIDER_NAME` | Displays alerts for all secrets issues by the specified provider. For more information, see "[{% data variables.product.prodname_secret_scanning_caps %} partners](/code-security/secret-scanning/secret-scanning-partners)." |
+|`provider:PROVIDER_NAME` | Displays alerts for all secrets issues by the specified provider. For more information, see "[List of supported secrets for private repositories](/code-security/secret-scanning/about-secret-scanning#list-of-supported-secrets-for-private-repositories) |

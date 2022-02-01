@@ -16,7 +16,7 @@ topics:
   - Repositories
   - Dependencies
   - Pull requests
-shortTitle: Use Dependabot with Actions
+shortTitle: Usar o Dependabot com ações
 ---
 
 {% data reusables.dependabot.beta-security-and-version-updates %}

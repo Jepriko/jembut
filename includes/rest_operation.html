@@ -31,9 +31,9 @@
           -->
         <tr>
           <td><code>accept</code></td>
-          <td>string</td>
-          <td>header</td>
-          <td>
+          <td class="opacity-70">string</td>
+          <td class="opacity-70">header</td>
+          <td class="opacity-70">
             <p>
               {%- if operation.hasRequiredPreviews -%} This API is under preview
               and subject to change. {%- else -%} Setting to
@@ -52,9 +52,9 @@
         {%- for param in operation.parameters -%}
         <tr>
           <td><code>{{ param.name }}</code></td>
-          <td>{{ param.schema.type }}</td>
-          <td>{{ param.in }}</td>
-          <td>
+          <td class="opacity-70">{{ param.schema.type }}</td>
+          <td class="opacity-70">{{ param.in }}</td>
+          <td class="opacity-70">
             {{ param.descriptionHTML }} {%- if param.schema.default != nil -%}
             Default: <code>{{ param.schema.default }}</code>
             {%- endif -%}
@@ -63,9 +63,9 @@
         {%- endfor -%} {%- for bodyParam in operation.bodyParameters -%}
         <tr>
           <td><code>{{ bodyParam.name }}</code></td>
-          <td>{{ bodyParam.type }}</td>
-          <td>{{ bodyParam.in }}</td>
-          <td>
+          <td class="opacity-70">{{ bodyParam.type }}</td>
+          <td class="opacity-70">{{ bodyParam.in }}</td>
+          <td class="opacity-70">
             {{ bodyParam.description }} {%- if bodyParam.default != nil -%}
             Default: <code>{{ bodyParam.default }}</code>
             {%- endif -%}
@@ -76,7 +76,7 @@
           <td colspan="4" class="has-nested-table">
             {%- for childParamsGroup in bodyParam.childParamsGroups -%}
             <details>
-              <summary role="button" aria-expanded="false" class="keyboard-focus color-fg-muted">
+              <summary class="color-fg-muted">
                 <span
                   class="d-inline-block mb-3"
                   id="{{ operation.slug }}-{{ childParamsGroup.id }}"
@@ -85,20 +85,14 @@
                   childParamsGroup.parentType }}</span
                 >
               </summary>
-              <table class="ml-4 mb-4 mt-2 color-bg-subtle">
-                <thead>
-                  <tr>
-                    <th>Name (Type)</th>
-                    <th>Description</th>
-                  </tr>
-                </thead>
+              <table>
                 <tbody>
                   {%- for childParam in childParamsGroup.params -%}
                   <tr>
-                    <td class="color-bg-subtle">
+                    <td class="opacity-70">
                       <code>{{ childParam.name }}</code> ({{ childParam.type }})
                     </td>
-                    <td class="color-bg-subtle">{{ childParam.description }}</td>
+                    <td class="opacity-70">{{ childParam.description }}</td>
                   </tr>
                   {%- endfor -%}
                 </tbody>
@@ -163,4 +157,5 @@
     </div>
     {%- endfor -%} {%- endif -%}
   </div>
+  <hr />
 </div>

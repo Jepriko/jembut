@@ -17,69 +17,46 @@ topics:
 shortTitle: レート制限
 ---
 
-{% data reusables.enterprise.rate_limit %}
-
-{% data reusables.rest-api.always-check-your-limit %}
-
-{% ifversion ghec or fpt %}
-
-## About rate limits for apps
-
-Rate limits for {% data variables.product.prodname_github_apps %} and {% data variables.product.prodname_oauth_apps %} depend on the plan for the organization where you install the application. For more information, see "[{% data variables.product.company_short %}'s products](/get-started/learning-about-github/githubs-products)" and "[Types of {% data variables.product.company_short %} accounts](/get-started/learning-about-github/types-of-github-accounts#organization-accounts)."
-
-{% endif %}
-
 ## サーバーからサーバーへのリクエスト
 
-{% ifversion ghec or fpt %}
+{% ifversion ghec %}
 
-### Default server-to-server rate limits for {% data variables.product.prodname_dotcom_the_website %}
+The rate limits for server-to-server requests made by {% data variables.product.prodname_github_apps %} depend on where the app is installed. If the app is installed on organizations or repositories owned by an enterprise on {% data variables.product.product_location %}, then the rate is higher than for installations outside an enterprise.
 
-{% endif %}
-
-{% data variables.product.prodname_github_apps %} making server-to-server requests use the installation's minimum rate limit of 5,000 requests per hour. If an application is installed on an organization with more than 20 users, the application receives another 50 requests per hour for each user. 20以上のリポジトリを持つインストールでは、リポジトリごとにⅠ時間あたり50リクエストが追加されます。 インストールに対する最大のレート制限は、Ⅰ時間あたり12,500リクエストです。
-
-{% ifversion fpt or ghec %}
-
-### Server-to-server rate limits for {% data variables.product.prodname_ghe_cloud %}
+### 通常のサーバーからサーバーへのレート制限
 
 {% endif %}
 
-{% ifversion fpt or ghec %}
+{% data reusables.apps.api-rate-limits-non-ghec %}
 
-{% data variables.product.prodname_github_apps %} that are installed on an organization or a repository within an enterprise on {% data variables.product.product_location %} are subject to a limit of 15,000 requests per hour.
+{% ifversion ghec %}
+
+### {% data variables.product.prodname_ghe_cloud %}のサーバーからサーバーへのレート制限
+
+{% data variables.product.prodname_github_apps %} that are installed on an organization or repository owned by an enterprise on {% data variables.product.product_location %} have a rate limit of 15,000 requests per hour for server-to-server requests.
 
 {% endif %}
 
 ## ユーザからサーバーへのリクエスト
 
-{% data variables.product.prodname_github_apps %} and {% data variables.product.prodname_oauth_apps %} can also act on behalf of a user, making user-to-server requests after the user authorizes the app. For more information, see "[Authorizing {% data variables.product.prodname_github_apps %}](/authentication/keeping-your-account-and-data-secure/authorizing-github-apps)" and "[Authorizing {% data variables.product.prodname_oauth_apps %}](/authentication/keeping-your-account-and-data-secure/authorizing-oauth-apps)."
-
-User-to-server requests from {% data variables.product.prodname_oauth_apps %} are authenticated with an OAuth token. User-to-server requests from {% data variables.product.prodname_github_apps %} are authenticated with either an OAuth token or an expiring user access token. For more information, see "[Identifying and authorizing users for {% data variables.product.prodname_github_apps %}](/developers/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps#identifying-and-authorizing-users-for-github-apps)" and "[Authorizing {% data variables.product.prodname_oauth_apps %}](/developers/apps/building-oauth-apps/authorizing-oauth-apps)."
-
-{% ifversion fpt or ghec %}
-
-### Default user-to-server rate limits for {% data variables.product.prodname_dotcom_the_website %}
-
-{% endif %}
+{% data variables.product.prodname_github_apps %}[ユーザの代わりに](/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps/#identifying-and-authorizing-users-for-github-apps)動作し、ユーザからサーバーへのリクエストを発行することができます。
 
 {% ifversion ghec %}
 
 The rate limits for user-to-server requests made by {% data variables.product.prodname_github_apps %} depend on where the app is installed. If the app is installed on organizations or repositories owned by an enterprise on {% data variables.product.product_location %}, then the rate is higher than for installations outside an enterprise.
 
-{% endif %}
-
-{% data reusables.apps.user-to-server-rate-limits %}
-
-{% ifversion fpt or ghec %}
-
-### User-to-server rate limits for {% data variables.product.prodname_ghe_cloud %}
-
-{% data reusables.apps.user-to-server-rate-limits-ghec %}
+### 通常のユーザからサーバーへのレート制限
 
 {% endif %}
 
-## 参考リンク
+User-to-server requests are rate limited at {% ifversion ghae %}15,000{% else %}5,000{% endif %} requests per hour and per authenticated user. ユーザが認可したすべてのOAuthアプリケーション、ユーザが所有する個人アクセストークン、ユーザの{% ifversion ghae %} トークン{% else %} ユーザ名およびパスワード{% endif %} で認証されたリクエストは、ユーザに対する1時間あたり5,000リクエストという割り当てを共有します。
 
-- "[Rate limiting](/rest/overview/resources-in-the-rest-api#rate-limiting)" in the REST API documentation
-- "[Resource limitations]({% ifversion ghec %}/free-pro-team@latest{% endif %}/graphql/overview/resource-limitations)" in the GraphQL API documentation
+{% ifversion ghec %}
+
+### {% data variables.product.prodname_ghe_cloud %}のユーザからサーバーへのレート制限
+
+When a user belongs to an enterprise on {% data variables.product.product_location %}, user-to-server requests to resources owned by the same enterprise are rate limited at 15,000 requests per hour and per authenticated user. All OAuth applications authorized by that user, personal access tokens owned by that user, and requests authenticated with that user's username and password share the same quota of 5,000 requests per hour for that user.
+
+{% endif %}
+
+レート制限に関する詳細な情報については、REST APIについては「[レート制限](/rest/overview/resources-in-the-rest-api#rate-limiting)」を、GraphQL APIについては「[リソース制限]({% ifversion ghec %}/free-pro-team@latest{% endif %}/graphql/overview/resource-limitations)」を参照してください。

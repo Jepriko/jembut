@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import cx from 'classnames'
 import { ChevronUpIcon } from '@primer/octicons-react'
+import { useTranslation } from '../../hooks/useTranslation'
 
 export type ScrollButtonPropsT = {
   className?: string
@@ -9,6 +10,7 @@ export type ScrollButtonPropsT = {
 
 export const ScrollButton = ({ className, ariaLabel }: ScrollButtonPropsT) => {
   const [show, setShow] = useState(false)
+  const { t } = useTranslation(['scroll_button'])
 
   useEffect(() => {
     // show scroll button only when view is scrolled down
@@ -28,21 +30,20 @@ export const ScrollButton = ({ className, ariaLabel }: ScrollButtonPropsT) => {
   }, [])
 
   const onClick = () => {
-    window.scrollTo(0, 0)
-    const topOfPage = document.getElementById('github-logo')
-    if (topOfPage) topOfPage.focus()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
-    <div
-      role="tooltip"
-      className={cx(className, 'transition-200', show ? 'opacity-100' : 'opacity-0')}
-    >
+    <div className={cx(className, 'transition-200', show ? 'opacity-100' : 'opacity-0')}>
       <button
         onClick={onClick}
-        className={cx(
-          'tooltipped tooltipped-n tooltipped-no-delay color-bg-accent-emphasis color-fg-on-emphasis circle border-0'
-        )}
+        className="color-bg-default color-fg-default border-0 d-inline-block mr-2 f6"
+      >
+        {t('scroll_to_top')}
+      </button>
+      <button
+        onClick={onClick}
+        className={cx('color-bg-accent-emphasis color-fg-on-emphasis circle border-0')}
         style={{ width: 40, height: 40 }}
         aria-label={ariaLabel}
       >
